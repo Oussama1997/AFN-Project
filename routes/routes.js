@@ -17,6 +17,10 @@ router.post("/users/add", User_controller.add);
 router.get("/users/:_id", User_controller.details);
 router.put("/users/:_id", User_controller.update);
 router.delete("/users/:id", User_controller.delete);
+// Register
+router.post("/register/add", User_controller.add);
+// Login
+router.get("/login/:_id", User_controller.findOne);
 
 module.exports = router;
 /*

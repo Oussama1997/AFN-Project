@@ -10,6 +10,7 @@ exports.findAll = (req, res) => {
 exports.add = function (req, res) {
     /*Creation de l'objet Partner*/
     let partner = new Partner({
+        username: req.body.username,
         name: req.body.name,
         email: req.body.email,
         address: req.body.address,
@@ -34,6 +35,7 @@ exports.details = function (req, res) {
 exports.update = (req, res, next) => {
     Partner.findById(req.params._id, (err,partner) => {
         // This assumes all the fields of the object is present in the body.
+        partner.username = req.body.username;
         partner.name = req.body.name;
         partner.email = req.body.email;
         partner.address = req.body.address;

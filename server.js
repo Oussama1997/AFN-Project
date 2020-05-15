@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 
 /** Database connexion**/
 var config = require("./config");
@@ -8,7 +9,7 @@ var config = require("./config");
 mongoose
   .connect(
     config.dbUrl,
-    { useNewUrlParser: true, useUnifiedTopology: true },
+    { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true },
     null
   )
   .then(() => {
@@ -29,7 +30,11 @@ const app = express();
 const posts = require("./routes/routes");
 
 // Using middleware
-app.use(express.static(path.join(__dirname, "public")));
+app.use(bodyParser.json());
+
+// set public ressoures folder
+//app.use(express.static(path.join(__dirname, "public")));
+
 app.use("/", posts);
 
 // Catch all other routes request and return it to the index

@@ -2,11 +2,13 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 let PartnersSchema = new Schema({
-  name: { type: String, required: true, max: 100 },
-  email: { type: String, required: true },
-  address: { type: String, required: true },
-  tel: { type: Number, required: true },
-  fax: { type: Number, required: false },
+    username: { type: String, required: true, max: 100 },
+    name: { type: String, required: true, max: 100 },
+    email: { type: String, required: true },
+    address: { type: String, required: true },
+    tel: { type: Number, required: true },
+    fax: { type: Number, required: false },
+    versionKey: false // You should be aware of the outcome after set to false
 });
 
 //export the model

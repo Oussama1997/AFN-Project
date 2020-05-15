@@ -15,7 +15,7 @@ exports.findAll = (req, res) => {
 exports.add = function (req, res) {
   /*Creation de l'objet User*/
   let user = new User({
-    username: req.body.name,
+    username: req.body.username,
     email: req.body.email,
     password: req.body.password,
   });
@@ -39,8 +39,29 @@ exports.details = function (req, res) {
   });
 };
 
+exports.findOne = function (req, res) {
+  User.findOne(req.params.email, (err, user) => {
+    // This assumes all the fields of the object is present in the body.
+    user.username = req.body.username;
+    user.email = req.body.email;
+
+    if (err) {
+      console.log(err);
+      callback("server error");
+    } else if (user == undefined) {
+      callback("user not found");
+    } else {
+      if ((user.password = req.body.password)) {
+        callback("login successfully");
+      } else {
+        callback("login info incorrect");
+      }
+    }
+  });
+};
+
 exports.update = (req, res, next) => {
-  User.findById(req.params._id, (err, user) => {
+  User.findById(req.body._id, (err, user) => {
     // This assumes all the fields of the object is present in the body.
     user.username = req.body.username;
     user.email = req.body.email;
@@ -60,7 +81,7 @@ exports.update = (req, res, next) => {
 
 exports.delete = function (req, res) {
   User.findById(req.params.id, (err, user) => {
-    user.remove((userErr, removedUser) => {
+    user.deleteOne((userErr, removedUser) => {
       if (userErr)
         return res
           .status(500)
