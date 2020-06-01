@@ -1,0 +1,14 @@
+[nz-form] {
+  max-width: 12000px;
+}
+.example {
+  text-align: center;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  padding: 300px 150px;
+}
+button {
+  margin-left: 20px;
+  height: 40px;
+  width: 60;
+}

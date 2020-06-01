@@ -1,0 +1,139 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+      <div class="card">
+        <div class="card-header">
+          <i class="cui-note icons"></i><strong>Complain</strong>
+        </div>
+        <div class="card-body">
+          <form
+            nz-form
+            [formGroup]="validateForm"
+            (ngSubmit)="submitForm(validateForm.value)"
+          >
+            <nz-form-item>
+              <br /><br />
+              <nz-form-label [nzSpan]="15" nzRequired
+                >Do you want to reveal your identity with the administrative<br />
+                and judicial authorities or any other structure ?</nz-form-label
+              >
+              <br />
+              <nz-radio-group
+                formControlName="permission"
+                [(ngModel)]="this.newReport.permission"
+                nzName="radiogroup"
+              >
+                <label nz-radio nzValue="YES">YES</label>
+                <label nz-radio nzValue="NON">NON</label>
+              </nz-radio-group>
+            </nz-form-item>
+
+            <nz-form-item>
+              <nz-form-label [nzSpan]="6" nzRequired>Site Name </nz-form-label>
+              <nz-form-control [nzSpan]="16">
+                <input
+                  [(ngModel)]="this.newReport.name"
+                  nz-input
+                  formControlName="name"
+                  placeholder="Site Name"
+                />
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+              <nz-form-label [nzSpan]="6" nzRequired>Web Site </nz-form-label>
+              <nz-form-control [nzSpan]="16">
+                <nz-input-group nzAddOnBefore="Http://" nzAddOnAfter=".tn">
+                  <input
+                    type="text"
+                    formControlName="site"
+                    placeholder="www.site"
+                    nz-input
+                    [(ngModel)]="this.newReport.site"
+                  />
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+              <nz-form-label [nzSpan]="6" nzRequired
+                >Types of News
+              </nz-form-label>
+              <nz-form-control [nzSpan]="16">
+                <nz-select
+                  nzAllowClear
+                  formControlName="typeNews"
+                  [(ngModel)]="this.newReport.typeNews"
+                >
+                  <nz-option
+                    nzValue="Arts & Culture"
+                    nzLabel="Arts & Culture"
+                  ></nz-option>
+                  <nz-option nzValue="Politics" nzLabel="Politics"></nz-option>
+                  <nz-option
+                    nzValue="Economic News"
+                    nzLabel="Economic News"
+                  ></nz-option>
+                  <nz-option
+                    nzValue="Health & Education"
+                    nzLabel="Health & Education"
+                  ></nz-option>
+                  <nz-option nzValue="Politics" nzLabel="Politics"></nz-option>
+                  <nz-option nzValue="Sports" nzLabel="Sports"></nz-option>
+                  <nz-option
+                    nzValue="Science & Tech"
+                    nzLabel="Science & Tech"
+                  ></nz-option>
+                </nz-select>
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+              <nz-form-label [nzSpan]="6" nzRequired>Subject </nz-form-label>
+              <nz-form-control [nzSpan]="16">
+                <nz-input-group
+                  [nzSuffix]="textAreaClearTpl"
+                  class="ant-input-affix-wrapper-textarea-with-clear-btn"
+                >
+                  <textarea
+                    nz-input
+                    [(ngModel)]="this.newReport.subject"
+                    formControlName="subject"
+                    placeholder="Subject : Propaganda, Satire/parody, Sloppy journalism, Misleading headings, Biased or slanted news"
+                  ></textarea>
+                </nz-input-group>
+                <ng-template #textAreaClearTpl
+                  ><i
+                    nz-icon
+                    class="ant-input-textarea-clear-icon"
+                    nzTheme="fill"
+                    nzType="close-circle"
+                    *ngIf="this.newReport.subject"
+                    (click)="this.newReport.subject = null"
+                  ></i
+                ></ng-template>
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+              <nz-form-control [nzOffset]="9" [nzSpan]="14">
+                <button
+                  nz-button
+                  nzType="primary"
+                  [disabled]="!validateForm.valid"
+                >
+                  Save
+                </button>
+                <button nz-button (click)="resetForm($event)">
+                  Reset
+                </button>
+              </nz-form-control>
+            </nz-form-item>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-2"></div>
+  </div>
+</div>

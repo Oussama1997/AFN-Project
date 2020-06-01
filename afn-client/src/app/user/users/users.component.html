@@ -1,0 +1,91 @@
+<div class="animated fadeIn">
+  <div class="card">
+    <div class="card-header">
+      <i class="cui-people icons"></i> <strong>Users</strong>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-4">
+          <nz-input-group nzSearch [nzAddOnAfter]="suffixButton">
+            <input
+              type="text"
+              (keyup)="search($event.target.value)"
+              nz-input
+              placeholder="input search text"
+            />
+          </nz-input-group>
+          <ng-template #suffixButton>
+            <button nz-button nzType="primary" nzSearch>Search</button>
+          </ng-template>
+        </div>
+      </div>
+
+      <nz-table #editRowTable nzBordered [nzData]="this.listUser">
+        <thead>
+          <tr>
+            <th nzWidth="20%">Username</th>
+            <th>Email</th>
+            <th>Date of Birth</th>
+            <th>Gender</th>
+            <th>Ville</th>
+            <th>Registration Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="editRowTable">
+          <tr *ngFor="let data of editRowTable.data" class="editable-row">
+            <td>{{ data.username }}</td>
+            <td>{{ data.email }}</td>
+            <td>
+              <div *ngIf="data.dateB; else elseTemplate">
+                {{ data.dateB | date: "dd/MM/yyyy" }}
+              </div>
+              <ng-template #elseTemplate>
+                <div class="text-center">
+                  <strong>-----</strong>
+                </div>
+              </ng-template>
+            </td>
+            <td>
+              <div *ngIf="data.gender; else elseTemplate">
+                {{ data.gender }}
+              </div>
+              <ng-template #elseTemplate>
+                <div class="text-center">
+                  <strong>-----</strong>
+                </div>
+              </ng-template>
+            </td>
+            <td>
+              <div *ngIf="data.ville; else elseTemplate">
+                {{ data.ville }}
+              </div>
+              <ng-template #elseTemplate>
+                <div class="text-center">
+                  <strong>-----</strong>
+                </div>
+              </ng-template>
+            </td>
+            <td>{{ data.date | date: "dd/MM/yyyy" }}</td>
+            <td>
+              <div class="editable-row-operations">
+                <a
+                  nz-popconfirm
+                  nzTitle="Sure to delete?"
+                  (nzOnConfirm)="deleteRow(data._id)"
+                >
+                  <i
+                    nz-icon
+                    [nzType]="'delete'"
+                    [nzTheme]="'twotone'"
+                    [nzTwotoneColor]="'#eb2f96'"
+                  ></i
+                ></a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
+</div>

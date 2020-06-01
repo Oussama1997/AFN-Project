@@ -2,10 +2,75 @@ import { INavData } from "@coreui/angular";
 
 export const navItems: INavData[] = [
   {
+    divider: true,
+  },
+  {
     name: "Dashboard",
     url: "/dashboard",
     icon: "icon-speedometer",
   },
+  {
+    divider: true,
+  },
+  {
+    title: true,
+    name: "User",
+  },
+  {
+    name: "Profil",
+    url: "/user/profil",
+    icon: "icon-user",
+  },
+  {
+    name: "Users",
+    url: "/user/users",
+    icon: "icon-people",
+  },
+  {
+    divider: true,
+  },
+  {
+    title: true,
+    name: "Partners",
+  },
+  {
+    name: "INLUCC",
+    url: "/inlucc",
+    icon: "icon-grid",
+    children: [
+      {
+        name: "About",
+        url: "/inlucc/about",
+        icon: "icon-info",
+      },
+      {
+        name: "Reports",
+        url: "/inlucc/list",
+        icon: "icon-list",
+      },
+    ],
+  },
+  {
+    divider: true,
+  },
+  {
+    name: "ANSI",
+    url: "/ansi",
+    icon: "icon-grid",
+    children: [
+      {
+        name: "About",
+        url: "/ansi/about",
+        icon: "icon-info",
+      },
+      {
+        name: "Reports",
+        url: "/ansi/list",
+        icon: "icon-list",
+      },
+    ],
+  },
+  /*
   {
     title: true,
     name: "Theme",
@@ -180,47 +245,7 @@ export const navItems: INavData[] = [
     url: "/widgets",
     icon: "icon-calculator",
   },
-  {
-    divider: true,
-  },
-  {
-    title: true,
-    name: "Partners",
-  },
-  {
-    name: "INLUCC",
-    url: "/inlucc",
-    icon: "icon-star",
-    children: [
-      {
-        name: "About & Contact",
-        url: "/asso1",
-        icon: "icon-star",
-      },
-      {
-        name: "Reports",
-        url: "/asso2",
-        icon: "icon-star",
-      },
-    ],
-  },
-  {
-    name: "ANSI",
-    url: "/asni",
-    icon: "icon-star",
-    children: [
-      {
-        name: "About & Contact",
-        url: "/asso1",
-        icon: "icon-star",
-      },
-      {
-        name: "Reports",
-        url: "/asso2",
-        icon: "icon-star",
-      },
-    ],
-  },
+  /*
   {
     name: "Pages",
     url: "/pages",
@@ -248,4 +273,5 @@ export const navItems: INavData[] = [
       },
     ],
   },
+  */
 ];

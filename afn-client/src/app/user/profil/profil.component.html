@@ -1,0 +1,388 @@
+<div *ngIf="showSpinner">
+  <div class="example">
+    <nz-spin nzSimple></nz-spin>
+  </div>
+</div>
+<div *ngIf="!showSpinner">
+  <div class="animated fadeIn">
+    <div class="row">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-10">
+        <div class="card">
+          <div class="card-header">
+            <strong>Account management</strong>
+            <small>Form</small>
+          </div>
+          <div class="card-body">
+            <form
+              nz-form
+              [formGroup]="validateForm"
+              (ngSubmit)="submitForm(validateForm.value)"
+            >
+              <div class="row">
+                <div class="form-group col-sm-6">
+                  <nz-form-item>
+                    <nz-form-label [nzSpan]="8" nzRequired
+                      >Username</nz-form-label
+                    >
+                    <nz-form-control
+                      [nzSpan]="14"
+                      nzHasFeedback
+                      nzValidatingTip="Validating..."
+                      [nzErrorTip]="userErrorTpl"
+                    >
+                      <nz-input-group nzPrefixIcon="user">
+                        <input
+                          nz-input
+                          [(ngModel)]="user.username"
+                          formControlName="username"
+                          placeholder="username"
+                        />
+                      </nz-input-group>
+                      <ng-template #userErrorTpl let-control>
+                        <ng-container *ngIf="control.hasError('required')">
+                          Please input your username!
+                        </ng-container>
+                        <ng-container *ngIf="control.hasError('duplicated')">
+                          The username is redundant!
+                        </ng-container>
+                      </ng-template>
+                    </nz-form-control>
+                  </nz-form-item>
+                </div>
+                <div class="form-group col-sm-6">
+                  <nz-form-item>
+                    <nz-form-label [nzSpan]="8" nzRequired>Email</nz-form-label>
+                    <nz-form-control
+                      [nzSpan]="14"
+                      nzHasFeedback
+                      [nzErrorTip]="emailErrorTpl"
+                    >
+                      <nz-input-group nzPrefixIcon="mail">
+                        <input
+                          nz-input
+                          [(ngModel)]="user.email"
+                          formControlName="email"
+                          placeholder="email"
+                          type="email"
+                        />
+                      </nz-input-group>
+                      <ng-template #emailErrorTpl let-control>
+                        <ng-container *ngIf="control.hasError('email')">
+                          The input is not valid E-mail!
+                        </ng-container>
+                        <ng-container *ngIf="control.hasError('required')">
+                          Please input your E-mail!
+                        </ng-container>
+                      </ng-template>
+                    </nz-form-control>
+                  </nz-form-item>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-sm-6">
+                  <nz-form-item>
+                    <nz-form-label [nzSpan]="8" nzRequired
+                      >Password</nz-form-label
+                    >
+                    <nz-form-control
+                      [nzSpan]="14"
+                      nzHasFeedback
+                      nzErrorTip="Please input your password!"
+                    >
+                      <nz-input-group nzPrefixIcon="lock">
+                        <input
+                          nz-input
+                          [(ngModel)]="user.password"
+                          placeholder="password"
+                          type="password"
+                          formControlName="password"
+                          (ngModelChange)="validateConfirmPassword()"
+                        />
+                      </nz-input-group>
+                    </nz-form-control>
+                  </nz-form-item>
+                </div>
+                <div class="form-group col-sm-6">
+                  <nz-form-item>
+                    <nz-form-label [nzSpan]="8" nzRequired
+                      >Confirm Password</nz-form-label
+                    >
+                    <nz-form-control
+                      [nzSpan]="14"
+                      nzHasFeedback
+                      [nzErrorTip]="passwordErrorTpl"
+                    >
+                      <nz-input-group nzPrefixIcon="lock">
+                        <input
+                          nz-input
+                          type="password"
+                          [(ngModel)]="user.password"
+                          formControlName="confirm"
+                          placeholder="confirm your password"
+                        />
+                      </nz-input-group>
+                      <ng-template #passwordErrorTpl let-control>
+                        <ng-container *ngIf="control.hasError('required')">
+                          Please confirm your password!
+                        </ng-container>
+                        <ng-container *ngIf="control.hasError('confirm')">
+                          Password is inconsistent!
+                        </ng-container>
+                      </ng-template>
+                    </nz-form-control>
+                  </nz-form-item>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-sm-2"></div>
+                <div class="form-group col-sm-6">
+                  <nz-form-item>
+                    <nz-form-control [nzOffset]="9" [nzSpan]="14">
+                      <button
+                        nz-button
+                        nzType="primary"
+                        [disabled]="!validateForm.valid"
+                      >
+                        Submit
+                      </button>
+                      <button nz-button (click)="resetForm($event)">
+                        Reset
+                      </button>
+                    </nz-form-control>
+                  </nz-form-item>
+                </div>
+                <div class="form-group col-sm-2"></div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!--/.col-->
+      <div class="col-sm-1"></div>
+    </div>
+    <!--/.row-->
+    <div class="row">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-10">
+        <div class="card">
+          <div class="card-header">
+            <strong>Personal data</strong>
+            <small>Form</small>
+          </div>
+          <div class="card-body">
+            <form
+              nz-form
+              [formGroup]="validateForm1"
+              (ngSubmit)="submitForm1(validateForm1.value)"
+            >
+              <div class="row">
+                <div class="form-group col-sm-6">
+                  <nz-form-item>
+                    <nz-form-label [nzSpan]="6" nzRequired
+                      >First Name
+                    </nz-form-label>
+                    <nz-form-control [nzSpan]="16">
+                      <input
+                        nz-input
+                        [(ngModel)]="user.firstname"
+                        formControlName="firstName"
+                        placeholder="firstname"
+                      />
+                    </nz-form-control>
+                  </nz-form-item>
+                </div>
+                <div class="form-group col-sm-6">
+                  <nz-form-item>
+                    <nz-form-label [nzSpan]="6" nzRequired
+                      >Last Name
+                    </nz-form-label>
+                    <nz-form-control [nzSpan]="16">
+                      <input
+                        nz-input
+                        [(ngModel)]="user.lastname"
+                        formControlName="lastName"
+                        placeholder="lastname"
+                      />
+                    </nz-form-control>
+                  </nz-form-item>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-sm-6">
+                  <nz-form-item>
+                    <nz-form-label [nzSpan]="6" nzRequired>CIN </nz-form-label>
+                    <nz-form-control [nzSpan]="16">
+                      <input
+                        nz-input
+                        [(ngModel)]="user.cin"
+                        formControlName="CIN"
+                        placeholder="CIN"
+                      />
+                    </nz-form-control>
+                  </nz-form-item>
+                </div>
+                <div class="form-group col-sm-6">
+                  <nz-form-item>
+                    <nz-form-label [nzSpan]="6" nzFor="gender" nzRequired
+                      >Gender</nz-form-label
+                    >
+                    <nz-form-control
+                      [nzSpan]="16"
+                      nzErrorTip="Please select your gender!"
+                    >
+                      <nz-select
+                        id="gender"
+                        [(ngModel)]="user.gender"
+                        formControlName="gender"
+                        nzPlaceHolder="Select a option"
+                      >
+                        <nz-option nzValue="Male" nzLabel="Male"></nz-option>
+                        <nz-option
+                          nzValue="Female"
+                          nzLabel="Female"
+                        ></nz-option>
+                      </nz-select>
+                    </nz-form-control>
+                  </nz-form-item>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-sm-6">
+                  <nz-form-item>
+                    <nz-form-label [nzSpan]="6" nzFor="Ville" nzRequired
+                      >Date of Birth</nz-form-label
+                    >
+                    <nz-form-control [nzSpan]="16">
+                      <nz-date-picker
+                        [(ngModel)]="user.dateB"
+                        formControlName="dateB"
+                      ></nz-date-picker>
+                    </nz-form-control>
+                  </nz-form-item>
+                </div>
+                <div class="form-group col-sm-6">
+                  <nz-form-item>
+                    <nz-form-label [nzSpan]="6" nzRequired>Tel </nz-form-label>
+                    <nz-form-control [nzSpan]="16">
+                      <input
+                        nz-input
+                        [(ngModel)]="user.tel"
+                        formControlName="tel"
+                        placeholder="Tel"
+                      />
+                    </nz-form-control>
+                  </nz-form-item>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-sm-6">
+                  <nz-form-item>
+                    <nz-form-label [nzSpan]="6" nzRequired
+                      >Profession
+                    </nz-form-label>
+                    <nz-form-control [nzSpan]="16">
+                      <input
+                        nz-input
+                        [(ngModel)]="user.profession"
+                        formControlName="Profession"
+                        placeholder="Profession"
+                      />
+                    </nz-form-control>
+                  </nz-form-item>
+                </div>
+                <div class="form-group col-sm-6">
+                  <nz-form-item>
+                    <nz-form-label [nzSpan]="6" nzFor="Ville" nzRequired
+                      >Ville</nz-form-label
+                    >
+                    <nz-form-control [nzSpan]="16">
+                      <nz-select
+                        [(ngModel)]="user.ville"
+                        nzPlaceHolder="Select your ville"
+                        formControlName="ville"
+                        nzAllowClear
+                        [nzDropdownRender]="renderTemplate"
+                      >
+                        <nz-option
+                          *ngFor="let o of optionList"
+                          [nzValue]="o"
+                          [nzLabel]="o"
+                        ></nz-option>
+                      </nz-select>
+                      <ng-template #renderTemplate>
+                        <nz-spin *ngIf="isLoading"></nz-spin>
+                      </ng-template>
+                    </nz-form-control>
+                  </nz-form-item>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-sm-6">
+                  <nz-form-item>
+                    <nz-form-label [nzSpan]="6" nzRequired
+                      >Adresse
+                    </nz-form-label>
+                    <nz-form-control [nzSpan]="16">
+                      <textarea
+                        nz-input
+                        [(ngModel)]="user.adresse"
+                        formControlName="adresse"
+                        placeholder="Adresse"
+                        [nzAutosize]="{ minRows: 2, maxRows: 4 }"
+                      ></textarea>
+                    </nz-form-control>
+                  </nz-form-item>
+                </div>
+                <div class="form-group col-sm-6">
+                  <nz-form-item nz-row class="register-area">
+                    <nz-form-control [nzSpan]="14" [nzOffset]="4" nzRequired>
+                      <label nz-checkbox nzRequired formControlName="agree">
+                        <span>I have read the <a>agreement</a></span>
+                      </label>
+                    </nz-form-control>
+                  </nz-form-item>
+                </div>
+              </div>
+              <!--<div class="row">
+                <div class="form-group col-sm-2"></div>
+                <div class="form-group col-sm-6">
+                  <nz-form-item nz-row class="register-area">
+                    <nz-form-control [nzSpan]="14" [nzOffset]="6">
+                      <label nz-checkbox formControlName="agree">
+                        <span>I have read the <a>agreement</a></span>
+                      </label>
+                    </nz-form-control>
+                  </nz-form-item>
+                </div>
+                <div class="form-group col-sm-2"></div>
+              </div>-->
+              <div class="row">
+                <div class="form-group col-sm-2"></div>
+                <div class="form-group col-sm-6">
+                  <nz-form-item>
+                    <nz-form-control [nzOffset]="9" [nzSpan]="14">
+                      <button
+                        nz-button
+                        nzType="primary"
+                        [disabled]="!validateForm1.valid"
+                      >
+                        Submit
+                      </button>
+                      <button nz-button (click)="resetForm1($event)">
+                        Reset
+                      </button>
+                    </nz-form-control>
+                  </nz-form-item>
+                </div>
+                <div class="form-group col-sm-2"></div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!--/.col-->
+      <div class="col-sm-1"></div>
+    </div>
+  </div>
+</div>

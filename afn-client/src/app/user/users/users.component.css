@@ -1,0 +1,22 @@
+.editable-cell {
+  position: relative;
+  padding: 5px 12px;
+  cursor: pointer;
+}
+
+.editable-row:hover .editable-cell {
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  padding: 4px 11px;
+}
+
+.editable-row-operations a {
+    margin-right: 8px;
+  }
+button {
+    margin-bottom: 16px;
+}
+.anticon {
+  margin-right: 6px;
+  font-size: 24px
+}

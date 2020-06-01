@@ -4,8 +4,8 @@ import { Routes, RouterModule } from "@angular/router";
 // Import Containers
 import { DefaultLayoutComponent } from "./containers";
 
-import { P404Component } from "./views/error/404.component";
-import { P500Component } from "./views/error/500.component";
+//import { P404Component } from "./views/error/404.component";
+//import { P500Component } from "./views/error/500.component";
 import { LoginComponent } from "./login/login.component";
 import { SignComponent } from "./sign/sign.component";
 import { HomeComponent } from "./home/home.component";
@@ -22,7 +22,7 @@ export const routes: Routes = [
     data: {
       title: "Home",
     },
-  },
+  },/*
   {
     path: "404",
     component: P404Component,
@@ -36,19 +36,19 @@ export const routes: Routes = [
     data: {
       title: "Page 500",
     },
-  },
+  },*/
   {
     path: "login",
     component: LoginComponent,
     data: {
-      title: "Login Page",
+      title: "Login",
     },
   },
   {
     path: "sign",
     component: SignComponent,
     data: {
-      title: "Sign In Page",
+      title: "Sign",
     },
   },
   {
@@ -58,6 +58,29 @@ export const routes: Routes = [
       title: "Home",
     },
     children: [
+      {
+        path: "dashboard",
+        loadChildren: () =>
+          import("./views/dashboard/dashboard.module").then(
+            (m) => m.DashboardModule
+          ),
+      },
+      {
+        path: "user",
+        loadChildren: () =>
+          import("./user/user.module").then((m) => m.UserModule),
+      },
+      {
+        path: "inlucc",
+        loadChildren: () =>
+          import("./inlucc/inlucc.module").then((m) => m.InluccModule),
+      },
+      {
+        path: "ansi",
+        loadChildren: () =>
+          import("./ansi/ansi.module").then((m) => m.AnsiModule),
+      },
+      /*
       {
         path: "base",
         loadChildren: () =>
@@ -73,13 +96,7 @@ export const routes: Routes = [
         loadChildren: () =>
           import("./views/chartjs/chartjs.module").then((m) => m.ChartJSModule),
       },
-      {
-        path: "dashboard",
-        loadChildren: () =>
-          import("./views/dashboard/dashboard.module").then(
-            (m) => m.DashboardModule
-          ),
-      },
+
       {
         path: "icons",
         loadChildren: () =>
@@ -101,10 +118,10 @@ export const routes: Routes = [
         path: "widgets",
         loadChildren: () =>
           import("./views/widgets/widgets.module").then((m) => m.WidgetsModule),
-      },
+      },*/
     ],
   },
-  { path: "**", component: P404Component },
+  //{ path: "**", component: P404Component },
 ];
 
 @NgModule({

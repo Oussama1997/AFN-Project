@@ -1,0 +1,252 @@
+<div  *ngIf="showSpinner">
+  <div class="example">
+    <nz-spin nzSimple></nz-spin>
+  </div>
+</div>
+<div  *ngIf="!showSpinner">
+  <div class="animated fadeIn">
+    <div class="row">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-10">
+        <div class="card">
+          <div class="card-header">
+            <i class="cui-info icons"></i><b>About</b>
+          </div>
+          <div class="card-body">
+            <div class="row justify-content-md-center">
+              <div class="col col-lg-4"></div>
+              <div
+                class="col-md-auto"
+                style="margin-left: 275px; margin-top: 10px;"
+              >
+                <div class="logo">
+                  <img src="../../../assets/img/ansi-logo.png" />
+                </div>
+              </div>
+              <div class="col col-lg-4"></div>
+            </div>
+            <form
+              nz-form
+              [formGroup]="validateForm"
+              (ngSubmit)="submitForm(validateForm.value)"
+            >
+            <div class="row">
+              <div class="form-group col-sm-6">
+                <nz-form-item>
+                  <nz-form-label [nzSpan]="6" nzRequired>Name</nz-form-label>
+                  <nz-form-control [nzSpan]="16" nzHasFeedback>
+                    <input
+                      nz-input
+                      [(ngModel)]="this.partner.name"
+                      formControlName="name"
+                      placeholder="Name"
+                    />
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+              <div class="form-group col-sm-6">
+                <nz-form-item>
+                  <nz-form-label [nzSpan]="6" nzRequired
+                    >Web Site
+                  </nz-form-label>
+                  <nz-form-control [nzSpan]="16" nzHasFeedback>
+                    <nz-input-group nzAddOnBefore="Http://" nzAddOnAfter=".tn">
+                      <input
+                        type="text"
+                        formControlName="site"
+                        placeholder="Site"
+                        nz-input
+                        [(ngModel)]="this.partner.site"
+                      />
+                    </nz-input-group>
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-sm-6">
+                <nz-form-item>
+                  <nz-form-label [nzSpan]="6" nzRequired>Tel </nz-form-label>
+                  <nz-form-control [nzSpan]="16" nzHasFeedback>
+                    <input nz-input [(ngModel)]="this.partner.tel" formControlName="tel" placeholder="Tel" />
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+              <div class="form-group col-sm-6">
+                <nz-form-item>
+                  <nz-form-label [nzSpan]="6" nzRequired>Fax </nz-form-label>
+                  <nz-form-control [nzSpan]="16" nzHasFeedback>
+                    <input nz-input [(ngModel)]="this.partner.fax" formControlName="fax" placeholder="Fix" />
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-sm-6">
+                <nz-form-item>
+                  <nz-form-label [nzSpan]="6" nzRequired>Email</nz-form-label>
+                  <nz-form-control
+                    [nzSpan]="16"
+                    nzHasFeedback
+                    [nzErrorTip]="emailErrorTpl"
+                  >
+                    <nz-input-group nzPrefixIcon="mail">
+                      <input
+                        nz-input
+                        [(ngModel)]="this.partner.email"
+                        formControlName="email"
+                        placeholder="Email"
+                        type="email"
+                      />
+                    </nz-input-group>
+                    <ng-template #emailErrorTpl let-control>
+                      <ng-container *ngIf="control.hasError('email')">
+                        The input is not valid E-mail!
+                      </ng-container>
+                      <ng-container *ngIf="control.hasError('required')">
+                        Please input your E-mail!
+                      </ng-container>
+                    </ng-template>
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+              <div class="form-group col-sm-6">
+                <nz-form-item>
+                  <nz-form-label [nzSpan]="6" nzRequired
+                    >Adresse
+                  </nz-form-label>
+                  <nz-form-control [nzSpan]="16" nzHasFeedback>
+                    <textarea
+                      nz-input
+                      [(ngModel)]="this.partner.adresse"
+                      formControlName="adresse"
+                      placeholder="Adresse"
+                      [nzAutosize]="{ minRows: 2, maxRows: 4 }"
+                    ></textarea>
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-sm-2"></div>
+              <div class="form-group col-sm-6">
+                <nz-form-item>
+                  <nz-form-control [nzOffset]="9" [nzSpan]="14">
+                    <button
+                      nz-button
+                      nzType="primary"
+                      [disabled]="!validateForm.valid"
+                    >
+                      Submit
+                    </button>
+                    <button nz-button (click)="resetForm($event)">
+                      Reset
+                    </button>
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+              <div class="form-group col-sm-2"></div>
+            </div>
+            </form>
+            <div class="row justify-content-center">
+              <div class="col col-lg-2"></div>
+              <div class="col-md-2 offset-md-2">
+                <button
+                  type="button"
+                  class="btn btn-primary btn-pill upload"
+                  (click)="showModal()"
+                >
+                  <i nz-icon [nzType]="'cloud-upload'" [nzTheme]="'outline'"></i
+                  ><b>Upload File</b>
+                </button>
+                <nz-modal
+                  [(nzVisible)]="isVisible"
+                  nzTitle="Upload File"
+                  nzOkText="OK"
+                  nzCancelText="Cancel"
+                  (nzOnOk)="handleOk()"
+                  (nzOnCancel)="handleCancel()"
+                >
+                  <form nz-form [formGroup]="validateForm1">
+                    <nz-form-item
+                      ><!-- nom du cours input-->
+                      <nz-form-label [nzSpan]="6" nzRequired
+                        >Nom File</nz-form-label
+                      >
+                      <nz-form-control [nzSpan]="16" nzHasFeedback>
+                        <input
+                          nz-input
+                          formControlName="NameFile"
+                          id="NameFile"
+                          placeholder="File Name"
+                        />
+                      </nz-form-control>
+                    </nz-form-item>
+                  </form>
+                </nz-modal>
+              </div>
+              <br />
+            </div>
+            <div class="row justify-content-center">
+              <div class="col col-lg-2"></div>
+              <div class="col col-lg-8">
+                <nz-table #editRowTable nzBordered [nzData]="listFile">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Added On</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr
+                      *ngFor="let data of editRowTable.data"
+                      class="editable-row"
+                    >
+                      <td>
+                        {{ data.namefile }}
+                      </td>
+                      <td>
+                        {{ data.date | date: "dd/MM/yyyy" }}
+                      </td>
+                      <td>
+                        <div class="editable-row-operations">
+                          <a
+                            nz-popconfirm
+                            nzTitle="Sure to download ?"
+                            (nzOnConfirm)="startDownload(data.id)"
+                          >
+                            <i
+                              nz-icon
+                              [nzType]="'cloud-download'"
+                              [nzTheme]="'outline'"
+                            ></i
+                          ></a>
+                          <nz-divider nzType="vertical"></nz-divider>
+                          <a
+                            nz-popconfirm
+                            nzTitle="Sure to delete ?"
+                            (nzOnConfirm)="deleteRow(data.id)"
+                          >
+                            <i
+                              nz-icon
+                              [nzType]="'delete'"
+                              [nzTheme]="'twotone'"
+                              [nzTwotoneColor]="'#eb2f96'"
+                            ></i
+                          ></a>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </nz-table>
+              </div>
+              <div class="col col-lg-2"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-1"></div>
+    </div>
+  </div>
+</div>

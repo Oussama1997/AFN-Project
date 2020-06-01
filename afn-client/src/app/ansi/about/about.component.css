@@ -1,0 +1,30 @@
+.example {
+  text-align: center;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  padding: 300px 150px;
+}
+.logo {
+  padding-top: 10px;
+  padding-bottom: 65px;
+  height: 50%;
+  width: 50%;
+}
+
+button {
+  margin-left: 20px;
+  height: 40px;
+  width: 60;
+}
+[nz-table] {
+  border-radius: 8px;
+}
+.upload {
+  margin-bottom: 20px;
+  height: 40px;
+  width: 140px;
+}
+.anticon {
+  margin-right: 6px;
+  font-size: 24px;
+}

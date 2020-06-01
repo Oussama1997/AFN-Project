@@ -1,0 +1,127 @@
+<div class="animated fadeIn">
+  <div class="card">
+    <div class="card-header">
+      <i class="cui-list icons"></i><strong>Reports</strong>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-8">
+          <nz-radio-group
+            [(ngModel)]="radioValue"
+            (click)="search()"
+            nzButtonStyle="solid"
+          >
+            <label nz-radio-button (click)="search()" nzValue="All">All</label>
+            <label nz-radio-button (click)="search()" nzValue="Waiting"
+              >Waiting</label
+            >
+            <label nz-radio-button (click)="search()" nzValue="Accepted"
+              >Accepted</label
+            >
+            <label nz-radio-button (click)="search()" nzValue="Refused"
+              >Refused</label
+            >
+          </nz-radio-group>
+        </div>
+        <div class="col-md-2 offset-md-2">
+          <button
+            [routerLink]="['../complain']"
+            type="button"
+            class="btn btn-primary btn-pill report"
+          >
+            <i class="icon-note"></i>
+            <b>Add a Report</b>
+          </button>
+        </div>
+        <br />
+      </div>
+      <nz-table
+        #editRowTable
+        nzBordered
+        [nzData]="listOfDisplayData"
+        [nzScroll]="{ x: '1300px', y: '500px' }"
+      >
+        <thead>
+          <tr>
+            <th nzWidth="60px" nzLeft></th>
+            <th nzWidth="15%" nzLeft>Username</th>
+            <th>Site Name</th>
+            <th>Web Site</th>
+            <th>Type Of News</th>
+            <th>Registre Date</th>
+            <th>Type</th>
+            <th nzRight>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container
+            *ngFor="let data of editRowTable.data"
+            class="editable-row"
+          >
+            <tr>
+              <td
+                nzLeft
+                [nzExpand]="expandSet.has(data.id)"
+                (nzExpandChange)="onExpandChange(data.id, $event)"
+              ></td>
+              <td nzLeft>{{ data.username }}</td>
+              <td>{{ data.name }}</td>
+              <td>{{ data.site }}</td>
+              <td>{{ data.typeNews }}</td>
+              <td>{{ data.date | date: "dd/MM/yyyy" }}</td>
+              <td>
+                <nz-select
+                  style="width: 110px;"
+                  nzAllowClear
+                  [(ngModel)]="data.type"
+                >
+                  <nz-option nzValue="Accepted" nzLabel="Accepted"></nz-option>
+                  <nz-option nzValue="Refused" nzLabel="Refused"></nz-option>
+                </nz-select>
+              </td>
+              <td nzRight>
+                <div class="editable-row-operations">
+                  <a
+                    nz-popconfirm
+                    nzTitle="Sure to edit ?"
+                    (nzOnConfirm)="startEdit(data.id)"
+                  >
+                    <i
+                      nz-icon
+                      [nzType]="'edit'"
+                      [nzTheme]="'twotone'"
+                      [nzTwotoneColor]="'#52c41a'"
+                    ></i
+                  ></a>
+                  <nz-divider nzType="vertical"></nz-divider>
+                  <a
+                    nz-popconfirm
+                    nzTitle="Sure to delete ?"
+                    (nzOnConfirm)="deleteRow(data.id)"
+                  >
+                    <i
+                      nz-icon
+                      [nzType]="'delete'"
+                      [nzTheme]="'twotone'"
+                      [nzTwotoneColor]="'#eb2f96'"
+                    ></i
+                  ></a>
+                  <nz-divider nzType="vertical"></nz-divider>
+                  <a
+                    nz-popconfirm
+                    nzTitle="Sure to printer ?"
+                    (nzOnConfirm)="printerRow(data.id)"
+                    ><i nz-icon nzType="printer" nzTheme="twotone"></i>
+                  </a>
+                </div>
+              </td>
+            </tr>
+            <tr [nzExpand]="expandSet.has(data.id)">
+              <span> Subject : {{ data.subject }}</span>
+            </tr>
+          </ng-container>
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
+</div>
